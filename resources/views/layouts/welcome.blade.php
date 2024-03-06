@@ -75,31 +75,14 @@
                                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                    
                             <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                            {{-- <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                                 <ul class="navbar-nav">
-                                    <li class="nav-item {{ Route::currentRouteName() === 'website.landingpage' ? 'active' : '' }}">
-                                        <a class="nav-link" href="{{ route('website.landingpage') }}">Home</a>
-                                    </li>
-                                    <li class="nav-item {{ Route::currentRouteName() === 'website.aktivitas' ? 'active' : '' }}">
-                                        <a class="nav-link" href="{{ route('website.aktivitas') }}">aktivitas</a>
-                                    </li>
-                                    <li class="nav-item {{ Route::currentRouteName() === 'website.kelas' ? 'active' : '' }}">
-                                        <a class="nav-link" href="{{ route('website.kelas') }}">kelas</a>
-                                    </li>
-                                    <li class="nav-item {{ Route::currentRouteName() === 'website.testimoni' ? 'active' : '' }}">
-                                        <a class="nav-link" href="{{ route('website.testimoni') }}">testimoni</a>
-                                    </li>
                                     <li class="nav-item {{ Route::currentRouteName() === 'website.blog' ? 'active' : '' }}">
                                         <a class="nav-link" href="{{ route('website.blog') }}">Blog</a>
                                     </li>
-                                    <li class="nav-item {{ Route::currentRouteName() === 'website.aboutus' ? 'active' : '' }}">
-                                        <a class="nav-link" href="{{ route('website.aboutus') }}">about us</a>
-                                    </li>
-                                    
                                 </ul>
-                            </div>
+                            </div> --}}
                         </div><!-- /.container-fluid -->
                     </nav>
                     

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class WebsiteController extends Controller
 {
@@ -15,10 +17,22 @@ class WebsiteController extends Controller
      */
     public function indexBlog()
     {
-        $blogs = Blog::paginate(2); // Adjust the number per page as needed
-        // $blogs = Blog::all();
-        return view('website.blog.index', compact('blogs'));
+        $blogs = Blog::paginate(3);
+    
+        // Manually create a LengthAwarePaginator from the result
+        $currentPage = Paginator::resolveCurrentPage();
+        $itemsPerPage = 2;
+        $blogsPaginated = new LengthAwarePaginator(
+            $blogs->items(),
+            $blogs->total(),
+            $itemsPerPage,
+            $currentPage,
+            ['path' => Paginator::resolveCurrentPath()]
+        );
+    
+        return view('website.blog.index', compact('blogsPaginated'));
     }
+
 
     public function showBlog($id)
     {
@@ -27,44 +41,6 @@ class WebsiteController extends Controller
         return view('website.blog.single', ['blogPost' => $blogPost]);
     }
 
-    public function indexlandingPage()
-    {
-       
-
-        // Tampilkan halaman blog
-        return view('website.landingpage.index');
-    }
-
-    public function indexAktivitas()
-    {
-       
-
-        // Tampilkan halaman blog
-        return view('website.aktivitas.index');
-    }
-
-    public function indexKelas()
-    {
-       
-
-        // Tampilkan halaman blog
-        return view('website.kelas.index');
-    }
-
-    public function indexTestimoni()
-    {
-       
-
-        // Tampilkan halaman blog
-        return view('website.testimoni.index');
-    }
-    public function indexAboutUs()
-    {
-       
-
-        // Tampilkan halaman blog
-        return view('website.aboutus.index');
-    }
 
     /**
      * Show the form for creating a new resource.

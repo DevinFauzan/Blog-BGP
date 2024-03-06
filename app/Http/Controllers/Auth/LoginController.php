@@ -35,7 +35,7 @@ class LoginController extends Controller
 
         switch ($role) {
             case 'admin':
-                return '/landing_page'; // Redirect admin
+                return '/blog'; // Redirect admin
                 break;
             case 'writer':
                 return '/blog';

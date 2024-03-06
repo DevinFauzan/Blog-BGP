@@ -58,6 +58,7 @@
 
     .card {
         display: block;
+        margin-left: 20px;
         margin-bottom: 10px;
         line-height: 1.42857143;
         background-color: #fff;
@@ -170,39 +171,38 @@
                 <div class="container">
                     <div class="row">
                         <div class="section-title text-center">
-                            <h2>Blog</h2>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, <br>
-                                there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the
-                                Semantics</p>
+                            <h2>Blog BGP</h2>
+                            <p>Our Latest Blog</p>
                         </div>
-                        @foreach ($blogs as $b)
-                            <div class="col-xs-12 col-sm-4">
-                                <div class="card">
-                                    <a class="img-card" href="#">
-                                        <img src="{{ asset('storage/' . $b->media_nama) }}" alt="{{ $b->judul }}" />
-                                    </a>
-                                    <div class="card-content">
-                                        <h4 class="card-title">
-                                            <a href="#"> {{ $b->judul }}</a>
-                                        </h4>
-                                        <p class="limited-text">
-                                            {{ $b->deskripsi }}
-                                        </p>
-                                    </div>
-                                    <div class="card-read-more">
-                                        <a href="{{ route('blog.showBlog', ['id' => $b->id]) }}"
-                                            class="btn btn-link btn-block">
-                                            Read More
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                        @foreach ($blogsPaginated as $b)
+    <div class="col-xs-12 col-sm-4 mb-3">
+        <div class="card">
+            <a class="img-card" href="#">
+                <img src="{{ asset('storage/' . $b->media_nama) }}" alt="{{ $b->judul }}" />
+            </a>
+            <div class="card-content">
+                <h4 class="card-title">
+                    <a href="#"> {{ $b->judul }}</a>
+                </h4>
+                <p class="limited-text">
+                    {{ $b->deskripsi }}
+                </p>
+            </div>
+            <div class="card-read-more">
+                <a href="{{ route('blog.showBlog', ['id' => $b->id]) }}" class="btn btn-link btn-block">
+                    Read More
+                </a>
+            </div>
+        </div>
+    </div>
+@endforeach
+
                         <!-- ... Rest of your cards ... -->
                     </div>
                 </div>
                 <div class="paginationBlog">
-                    {{ $blogs->links() }}
+                    
+                    {{ $blogsPaginated->links() }}
                 </div>
             </div>
         </div>

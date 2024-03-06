@@ -40,29 +40,9 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/form_blog', [AdminController::class, 'showBlogForm'])->name('form_blog');
     Route::post('/blog/submit', [AdminController::class, 'submitNewBlog'])->name('blog.submit');
     Route::get('/blog/fetch', [AdminController::class, 'fetchBlogData'])->name('blog.fetch');
-
-    // Landing Page Routes
-    Route::get('/landing_page', [AdminController::class, 'showLandingPage'])->name('landing_page');
-    Route::get('/form_landing_page', [AdminController::class, 'showLandingPageForm'])->name('form_landing_page');
-
-    // Aktivitas Routes
-    Route::get('/aktivitas', [AdminController::class, 'showAktivitas'])->name('aktivitas');
-    Route::get('/form_aktivitas', [AdminController::class, 'showAktivitasForm'])->name('form_aktivitas');
-
-    // Kelas Routes
-    Route::get('/kelas', [AdminController::class, 'showKelas'])->name('kelas');
-    Route::get('/form_kelas', [AdminController::class, 'showKelasForm'])->name('form_kelas');
-
-    // Testimoni Routes
-    Route::get('/testimoni', [AdminController::class, 'showTestimoni'])->name('testimoni');
-    Route::get('/form_testimoni', [AdminController::class, 'showTestimoniForm'])->name('form_testimoni');
-
-    // About Us Routes
-    Route::get('/about_us', [AdminController::class, 'showAboutUs'])->name('about_us');
-    Route::get('/form_about_us', [AdminController::class, 'showAboutUsForm'])->name('form_about_us');
-
-    // Pendaftaran Route
-    Route::get('/pendaftaran', [AdminController::class, 'showPendaftaran'])->name('pendaftaran');
+    Route::get('/blog/edit/{id}', [AdminController::class, 'showEditBlogForm'])->name('blog.edit');
+    Route::post('/blog/edit/{id}', [AdminController::class, 'submitEditBlog'])->name('blog.edit.submit');
+    
 
     // rms Route
     Route::get('/role_management', [AdminController::class, 'showRolemanagement'])->name('showRolemanagement');
