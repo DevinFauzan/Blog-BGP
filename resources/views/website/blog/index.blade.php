@@ -175,33 +175,34 @@
                             <p>Our Latest Blog</p>
                         </div>
                         @foreach ($blogsPaginated as $b)
-    <div class="col-xs-12 col-sm-4 mb-3">
-        <div class="card">
-            <a class="img-card" href="#">
-                <img src="{{ asset('storage/' . $b->media_nama) }}" alt="{{ $b->judul }}" />
-            </a>
-            <div class="card-content">
-                <h4 class="card-title">
-                    <a href="#"> {{ $b->judul }}</a>
-                </h4>
-                <p class="limited-text">
-                    {{ $b->deskripsi }}
-                </p>
-            </div>
-            <div class="card-read-more">
-                <a href="{{ route('blog.showBlog', ['id' => $b->id]) }}" class="btn btn-link btn-block">
-                    Read More
-                </a>
-            </div>
-        </div>
-    </div>
-@endforeach
+                            <div class="col-xs-12 col-sm-4 mb-3">
+                                <div class="card">
+                                    <a class="img-card" href="#">
+                                        <img src="{{ asset('storage/' . $b->media_nama) }}" alt="{{ $b->judul }}" />
+                                    </a>
+                                    <div class="card-content">
+                                        <h4 class="card-title">
+                                            <a href="#"> {{ $b->judul }}</a>
+                                        </h4>
+                                        <p class="limited-text">
+                                            {{ $b->deskripsi }}
+                                        </p>
+                                    </div>
+                                    <div class="card-read-more">
+                                        <a href="{{ route('blog.showBlog', ['id' => $b->id]) }}"
+                                            class="btn btn-link btn-block">
+                                            Read More
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
 
                         <!-- ... Rest of your cards ... -->
                     </div>
                 </div>
                 <div class="paginationBlog">
-                    
+
                     {{ $blogsPaginated->links() }}
                 </div>
             </div>
