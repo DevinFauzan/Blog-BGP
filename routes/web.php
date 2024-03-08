@@ -76,6 +76,8 @@ Route::middleware(['auth', 'ordal'])->group(function () {
     Route::get('/form_blog', [AdminController::class, 'showBlogForm'])->name('form_blog');
     Route::post('/blog/submit', [AdminController::class, 'submitNewBlog'])->name('blog.submit');
     Route::get('/blog/fetch', [AdminController::class, 'fetchBlogData'])->name('blog.fetch');
+    Route::delete('/blog/delete/{id}', [AdminController::class, 'deleteBlog'])->name('blog.delete');
+
 
     // About Us Routes accessible only to ordal
     Route::get('/about_us', [AdminController::class, 'showAboutUs'])->name('about_us');

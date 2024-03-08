@@ -25,7 +25,7 @@
                                             <th>Deskripsi</th>
                                             <th>Di Submit oleh</th>
                                             <th>Tanggal Submit</th>
-                                            <th>Edit</th>
+                                            <th>Edit | Delete</th>
                                         </tr>
                                     </thead>
                                     <tbody id="blogTableBody">
@@ -36,13 +36,22 @@
                                                         width="50">
                                                 </td>
                                                 <td>{{ $blog->judul }}</td>
-                                                <td>{{ strlen($blog->deskripsi) > 50 ? substr($blog->deskripsi, 0, 50) . '...' : $blog->deskripsi }}
+                                                <td>{!! strlen($blog->deskripsi) > 50 ? substr($blog->deskripsi, 0, 30) . '...' : $blog->deskripsi !!}
                                                 </td>
                                                 <td>{{ $blog->user ? $blog->user->name : 'N/A' }}</td>
                                                 <td>{{ $blog->created_at }}</td>
+                                                <td>{{ $blog->getStatusPublishText() }}</td>
                                                 <td>
                                                     <a href="{{ route('blog.edit', $blog->id) }}"
                                                         class="btn btn-warning">Edit</a>
+                                                    <form id="deleteForm{{ $blog->id }}"
+                                                        action="{{ route('blog.delete', $blog->id) }}" method="POST"
+                                                        style="display: inline-block;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="button" class="btn btn-danger delete-blog"
+                                                            data-blog-id="{{ $blog->id }}">Delete</button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -57,12 +66,42 @@
     @endsection
 
 
+
     @section('scripts')
         <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
         <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
         <script>
             $(document).ready(function() {
                 var table = $('#blogTable').DataTable(); // Inisialisasi DataTable                
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Tambahkan event listener pada tombol delete
+                var deleteButtons = document.querySelectorAll('.delete-blog');
+
+                deleteButtons.forEach(function(button) {
+                    button.addEventListener('click', function() {
+                        var blogId = button.getAttribute('data-blog-id');
+
+                        Swal.fire({
+                            title: 'Apakah Anda yakin?',
+                            text: 'Anda tidak dapat mengembalikan data ini!',
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#d33',
+                            cancelButtonColor: '#3085d6',
+                            confirmButtonText: 'Ya, hapus!',
+                            cancelButtonText: 'Batal'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                // Jika pengguna mengonfirmasi, kirim formulir delete
+                                document.getElementById('deleteForm' + blogId).submit();
+                            }
+                        });
+                    });
+                });
             });
         </script>
     @endsection

@@ -46,13 +46,15 @@ class AdminController extends Controller
         // $mediaPath = $request->file('media_nama')->store('media', 'public');
         $mediaPath = $request->file('media_nama')->storeAs('media', $request->file('media_nama')->getClientOriginalName(), 'public');
 
-
         // Simpan data ke tabel Media
         $media = Media::create([
             'media_id'   => $mediaId,
             'media_nama' => $mediaPath,
             'created_at' => now(),
         ]);
+
+        // Set is_publish to "gagal" or false
+        $isPublish = false;
 
         // Create a new blog using the Blog model
         $blog = Blog::create([
@@ -62,10 +64,11 @@ class AdminController extends Controller
             'media_id'    => $media->id,
             'media_nama'  => $media->media_nama,
             'user_id'     => auth()->user()->id,
+            'is_publish'  => $isPublish,
         ]);
 
         // Redirect atau kirim respons sesuai kebutuhan
-        return redirect()->route('blog')->with('success', 'Blog berhasil disubmit.');
+        return redirect()->route('form_blog')->with('success', 'Blog submitted successfully!');
     }
 
     public function showEditBlogForm($id)
@@ -76,51 +79,82 @@ class AdminController extends Controller
     }
 
     public function submitEditBlog(Request $request, $id)
-{
-    $blog = Blog::find($id);
+    {
+        $blog = Blog::find($id);
 
-    // Validate the form data
-    $request->validate([
-        'media_nama' => 'nullable|mimes:jpeg,png,jpg,gif,mp4,avi,wmv|max:10240',
-        'deskripsi'  => 'required',
-        'judul'      => 'required',
-        'created_at' => 'required|date',
-    ]);
-
-    // Update the existing blog data
-    $blog->deskripsi = $request->input('deskripsi');
-    $blog->judul = $request->input('judul');
-    $blog->created_at = $request->input('created_at');
-
-    // Update media if a new file is provided
-    if ($request->hasFile('media_nama')) {
+        // Validate the form data
         $request->validate([
-            'media_nama' => 'mimes:jpeg,png,jpg,gif,mp4,avi,wmv|max:10240',
+            'media_nama' => 'nullable|mimes:jpeg,png,jpg,gif,mp4,avi,wmv|max:10240',
+            'deskripsi'  => 'required',
+            'judul'      => 'required',
+            'created_at' => 'required|date',
+            'is_publish' => 'nullable|boolean', // Add validation for is_publish
         ]);
 
-        // Delete the old media file
-        Storage::disk('public')->delete($blog->media_nama);
+        // Update the existing blog data
+        $blog->deskripsi = $request->input('deskripsi');
+        $blog->judul = $request->input('judul');
+        $blog->created_at = $request->input('created_at');
 
-        // Store the new media file
-        $mediaPath = $request->file('media_nama')->storeAs('media', $request->file('media_nama')->getClientOriginalName(), 'public');
+        // Update media if a new file is provided
+        if ($request->hasFile('media_nama')) {
+            $request->validate([
+                'media_nama' => 'mimes:jpeg,png,jpg,gif,mp4,avi,wmv|max:10240',
+            ]);
 
-        // Update media data
-        $media = Media::create([
-            'media_id'   => 'MD' . str_pad(Media::count() + 1, 4, '0', STR_PAD_LEFT),
-            'media_nama' => $mediaPath,
-            'created_at' => now(),
-        ]);
+            // Delete the old media file
+            Storage::disk('public')->delete($blog->media_nama);
 
-        $blog->media_id = $media->id;
-        $blog->media_nama = $media->media_nama;
+            // Store the new media file
+            $uploadedFile = $request->file('media_nama');
+            $mediaPath = $uploadedFile->storeAs('media', $uploadedFile->getClientOriginalName(), 'public');
+
+            // Update media data
+            $media = Media::create([
+                'media_id'   => 'MD' . str_pad(Media::count() + 1, 4, '0', STR_PAD_LEFT),
+                'media_nama' => $mediaPath,
+                'created_at' => now(),
+            ]);
+
+            $blog->media_id = $media->id;
+            $blog->media_nama = asset('storage/' . $mediaPath); // Use asset() to generate the URL
+        }
+
+        // Update is_publish if provided in the form
+        if ($request->has('is_publish')) {
+            $blog->is_publish = $request->input('is_publish');
+        }
+
+        // Save the changes
+        $blog->save();
+
+        // Redirect or send a response as needed
+        // return redirect()->route('blog')->with('success', 'Blog successfully updated.');
+        return redirect()->back()->with('success', 'Blog updated successfully!');
     }
 
-    // Save the changes
-    $blog->save();
+    public function deleteBlog($id)
+    {
+        $blog = Blog::find($id);
 
-    // Redirect or send a response as needed
-    return redirect()->route('blog')->with('success', 'Blog successfully updated.');
-}
+        if ($blog) {
+            // Retrieve the related media record
+            $media = Media::find($blog->media_id);
+
+            // Delete the blog record
+            $blog->delete();
+
+            // Delete the related media record
+            if ($media) {
+                $media->delete();
+            }
+
+            return redirect()->route('blog')->with('success', 'Blog berhasil dihapus');
+        } else {
+            return redirect()->route('blog')->with('error', 'Blog tidak ditemukan');
+        }
+    }
+
 
 
     public function fetchBlogData()

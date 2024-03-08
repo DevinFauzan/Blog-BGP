@@ -17,20 +17,8 @@ class WebsiteController extends Controller
      */
     public function indexBlog()
     {
-        $blogs = Blog::paginate(3);
-    
-        // Manually create a LengthAwarePaginator from the result
-        $currentPage = Paginator::resolveCurrentPage();
-        $itemsPerPage = 2;
-        $blogsPaginated = new LengthAwarePaginator(
-            $blogs->items(),
-            $blogs->total(),
-            $itemsPerPage,
-            $currentPage,
-            ['path' => Paginator::resolveCurrentPath()]
-        );
-    
-        return view('website.blog.index', compact('blogsPaginated'));
+        $blogs = Blog::orderBy('is_publish', 'desc')->paginate(3); // Order by is_publish in descending order
+        return view('website.blog.index', compact('blogs'));
     }
 
 
