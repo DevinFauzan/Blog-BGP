@@ -272,4 +272,9 @@ class AdminController extends Controller
         $role = Roles::find($id);
         return view('website.blog.admin.roleManagement.role_management_detail', compact('role'));
     }
+
+    public function upload(Request $request){
+        $imgpath = request()->file('file')->store('media', 'public');
+        return response()->json(['location'=> "/storage/$imgpath"]);
+    }
 }

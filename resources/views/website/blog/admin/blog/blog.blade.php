@@ -25,6 +25,7 @@
                                             <th>Deskripsi</th>
                                             <th>Di Submit oleh</th>
                                             <th>Tanggal Submit</th>
+                                            <th>Publikasi</th>
                                             <th>Edit | Delete</th>
                                         </tr>
                                     </thead>
@@ -35,8 +36,14 @@
                                                     <img src="/storage/{{ $blog->media_nama }}" alt="Media"
                                                         width="50">
                                                 </td>
-                                                <td>{{ $blog->judul }}</td>
-                                                <td>{!! strlen($blog->deskripsi) > 50 ? substr($blog->deskripsi, 0, 30) . '...' : $blog->deskripsi !!}
+                                                <td>{{ strlen($blog->judul) > 15 ? substr($blog->judul, 0, 15) . '...' : $blog->judul }}
+                                                </td>
+                                                <td>
+                                                    @if (isset($blog->deskripsi) && strlen($blog->deskripsi) > 30)
+                                                        {!! substr(html_entity_decode(strip_tags($blog->deskripsi)), 0, 30) !!}...
+                                                    @else
+                                                        {!! html_entity_decode($blog->deskripsi) !!}
+                                                    @endif
                                                 </td>
                                                 <td>{{ $blog->user ? $blog->user->name : 'N/A' }}</td>
                                                 <td>{{ $blog->created_at }}</td>

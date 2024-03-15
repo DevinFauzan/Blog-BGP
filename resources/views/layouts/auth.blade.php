@@ -245,7 +245,7 @@
                         </a>
                     </li>
                     @endif
-                    @if(auth()->user()->role == 'admin')
+                    {{-- @if(auth()->user()->role == 'admin')
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('showRolemanagement') }}">
                             <span class="menu-title">Role Management</span>
@@ -260,7 +260,7 @@
                             <i class="mdi mdi-information-variant menu-icon"></i>
                         </a>
                     </li>
-                    @endif
+                    @endif --}}
                     {{-- <li class="nav-item">
                         <a class="nav-link" href="pages/forms/basic_elements.html">
                             <span class="menu-title">Forms</span>

@@ -87,8 +87,7 @@ Route::middleware(['auth', 'ordal'])->group(function () {
 
 
 //WEBSITE DEPAN
-
-
+Route::post('/upload', [AdminController::class, 'upload']);
 // Landing Page
 Route::get('/blog/{id}', [WebsiteController::class, 'showBLog'])
     ->name('blog.showBlog');

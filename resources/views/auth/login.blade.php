@@ -12,8 +12,8 @@
                         </div>
                         <form method="POST" action="{{ route('login') }}" class="log-in" autocomplete="off">
                             @csrf
-                            <h4>BLOG YCMII <span>SDK</span></h4>
-                            <p>Welcome back! Log in to your account to do data entry</p>
+                            <h4>BLOG BGP <span>SDK</span></h4>
+                            <p>Welcome back! Log in to your account to do Blog</p>
 
                             <div class="floating-label">
                                 <input id="email" type="email" class="@error('email') is-invalid @enderror"
