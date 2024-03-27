@@ -8,7 +8,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Ticket Help Desk</title>
+    <title>BGP BLOG CMS</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon-16x16.png" />
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

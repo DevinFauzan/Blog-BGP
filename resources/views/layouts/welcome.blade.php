@@ -7,9 +7,11 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta name="description" content="Aviato E-Commerce Template">
-    <meta name="author" content="Themefisher.com">
-    <title>Airspace | Creative Agency Bootstrap template</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Birma Gemilang Prima</title>
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon-16x16.png" />
 
     <!-- Mobile Specific Meta-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -63,11 +65,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <!-- header Nav Start -->
-                    <nav class="navbar navbar-expand-lg navbar-light">
+                    <nav class="navbar navbar-expand-lg navbar-light justify-content-center">
                         <div class="container-fluid">
                             <!-- Brand and toggle get grouped for better mobile display -->
                             <a class="navbar-brand" href="{{ route('website.landingpage', 'landingpage') }}">
-                                <img src="{{ asset('assets/website/images/logo.png') }}" alt="Logo">
+                                <img style="max-height: 100px" src="{{ asset('assets/img/navbar-logo.png') }}" alt="Logo">
                             </a>
                     
                             <!-- Toggler/collapsible Button -->
@@ -99,29 +101,17 @@
 
     @yield('content')
     <!-- footer Start -->
-    <footer class="footer">
+    {{-- <footer class="footer">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="footer-manu">
-                        <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">Contact us</a></li>
-                            <li><a href="#">How it works</a></li>
-                            <li><a href="#">Support</a></li>
-                            <li><a href="#">Terms</a></li>
-                        </ul>
-                    </div>
-                    <p class="copyright">Copyright 2018 &copy; Design & Developed by <a
-                            href="http://www.themefisher.com">themefisher.com</a>. All rights reserved.
+                    <p class="copyright">Copyright 2024 &copy; Birma Gemilang Prima
                         <br>
-                        Get More <a href="https://themewagon.com/theme_tag/free/" target="_blank">Free Bootstrap
-                            Templates</a>
-                    </p>
+                    </p>
                 </div>
             </div>
-        </div>
-    </footer>
+        </div> --}}
+    </footer>
 
     <!--
     Essential Scripts

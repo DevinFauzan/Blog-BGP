@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{ asset('assets/auth/css/style.css') }}">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('assets/auth/images/favicon.ico') }}" />
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon-16x16.png" />
     
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -37,8 +39,7 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" href="index.html"><img
-                        src="{{ asset('assets/auth/images/miracleschool.jaksel.jpg') }}" alt="logo" /></a>
+                <a class="navbar-brand brand-logo" href="index.html"><img src="{{ asset('assets/img/navbar-logo.png') }}" alt="Logo"></a>
                 <a class="navbar-brand brand-logo-mini" href="index.html"><img
                         src="{{ asset('assets/auth/images/logo-mini.svg') }}" alt="logo" /></a>
             </div>
@@ -325,14 +326,16 @@
 
             <!-- partial:partials/_footer.html -->
             <footer class="footer">
-                <div class="container-fluid d-flex justify-content-between">
-                    <span class="text-muted d-block text-center text-sm-start d-sm-inline-block">Copyright ©
-                        bootstrapdash.com 2021</span>
-                    <span class="float-none float-sm-end mt-1 mt-sm-0 text-end"> Free <a
-                            href="https://www.bootstrapdash.com/bootstrap-admin-template/" target="_blank">Bootstrap
-                            admin template</a> from Bootstrapdash.com</span>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="copyright">Copyright 2024 &copy; Birma Gemilang Prima
+                                <br>
+                            </p>
+                        </div>
+                    </div>
                 </div>
-            </footer>
+            </footer>
             <!-- partial -->
         </div>
         <!-- main-panel ends -->

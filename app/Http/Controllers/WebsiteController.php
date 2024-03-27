@@ -17,10 +17,21 @@ class WebsiteController extends Controller
      */
     public function indexBlog()
     {
-        $blogs = Blog::orderBy('is_publish', 'desc')->paginate(3); // Order by is_publish in descending order
-        return view('website.blog.index', compact('blogs'));
+        $blogs = Blog::where('is_publish', 1)
+                      ->orderBy('created_at', 'desc') // Mengganti dengan kolom yang sesuai untuk urutan terbaru
+                      ->paginate(3);
+        
+        return view('index', compact('blogs'));
     }
 
+    public function indexBlogAll()
+    {
+        $blogs = Blog::where('is_publish', 1)
+                      ->orderBy('created_at', 'desc') // Mengganti dengan kolom yang sesuai untuk urutan terbaru
+                      ->paginate(9);
+        
+        return view('website.blog.index', compact('blogs'));
+    }
 
     public function showBlog($id)
     {

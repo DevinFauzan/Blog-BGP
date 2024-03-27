@@ -197,12 +197,9 @@
                                                     alt="{{ $b->judul }}" />
                                             </a>
                                             <div class="card-content">
-                                                <h4 class="card-title">
-                                                    <a href="#"> {{ $b->judul }}</a>
-                                                </h4>
-                                                <p class="limited-text">
-                                                    {!! $b->deskripsi !!}
-                                                </p>
+                                                <h5 class="card-title">
+                                                    {{ ($b->judul) > 15 ? substr($b->judul, 0, 30) . '...' : $b->judul }}
+                                                </h5>
                                             </div>
                                             <div class="card-read-more">
                                                 <a href="{{ route('blog.showBlog', ['id' => $b->id]) }}"
@@ -217,10 +214,9 @@
                         @endif
                     </div>
                 </div>
-                <div class="paginationBlog">
-
+                {{-- <div class="paginationBlog">
                     {{ $blogs->links() }}
-                </div>
+                </div> --}}
             </div>
         </div>
     </section>

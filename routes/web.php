@@ -25,10 +25,16 @@ use App\Http\Controllers\WebsiteController;
 |
 */
 
-Route::get('/', function () {
+Route::get('/login', function () {
     auth()->logout();
     return view('auth.login');
 });
+
+// Route::get('/', function () {
+//     return view('index');
+// });
+Route::get('/', [WebsiteController::class, 'indexBlog'])->name('index');
+Route::get('/allblog', [WebsiteController::class, 'indexBlogAll'])->name('indexBlogAll');
 
 //Admin Web Miracle
 
